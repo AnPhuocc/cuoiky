@@ -23,7 +23,7 @@ public class StudentsModify {
         
         try {
             //select * from
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diem", "root", "");
             
             //query
             String sql = "select * from studentmanage";
@@ -36,16 +36,13 @@ public class StudentsModify {
                 		resultSet.getInt("stt"),
                         resultSet.getString("hoten"), 
                         resultSet.getString("mssv"),  
-                        resultSet.getInt("namsinh"),
-                        resultSet.getString("gioitinh"), 
-                        resultSet.getString("lop"),
-                        resultSet.getString("email"),
-                        resultSet.getString("mon1"),
-                        resultSet.getDouble("diem1"),
-                        resultSet.getString("mon2"),
-                        resultSet.getDouble("diem2"),
-                        resultSet.getString("mon3"),
-                        resultSet.getDouble("diem3"));
+                        resultSet.getString("mamon"), 
+                        resultSet.getString("tenmon"),
+                        resultSet.getDouble("diembt"),
+                        resultSet.getDouble("diemkt"),
+                        resultSet.getDouble("diemck"),
+                        resultSet.getDouble("diemtong"),
+                        resultSet.getString("xeploai"));
                 		
                 
                 studentList.add(std);
@@ -80,25 +77,21 @@ public class StudentsModify {
         
         try {
             //select * from
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diem", "root", "");
             
             //query
-            String sql = "insert into studentmanage(hoten, mssv, namsinh, gioitinh, lop, email, mon1, diem1, mon2, diem2, mon3, diem3) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into studentmanage(hoten, mssv, mamon, tenmon, diembt, diemkt, diemck, diemtong, xeploai) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = connection.prepareCall(sql);
             
             statement.setString(1, std.getHoten());
             statement.setString(2, std.getMssv());
-            statement.setInt(3, std.getNamsinh());
-            statement.setString(4, std.getGioitinh());
-            statement.setString(5, std.getLop());
-            statement.setString(6, std.getEmail());
-            statement.setString(7, std.getMon1());
-            statement.setDouble(8, std.getDiem1());
-            statement.setString(9, std.getMon1());
-            statement.setDouble(10, std.getDiem2());
-            statement.setString(11, std.getMon1());
-            statement.setDouble(12, std.getDiem3());
-            
+            statement.setString(3, std.getMamon());
+            statement.setString(4, std.getTenmon());
+            statement.setDouble(5, std.getDiembt());
+            statement.setDouble(6, std.getDiemkt());
+            statement.setDouble(7, std.getDiemck());
+            statement.setDouble(8, std.getDiemtong());
+            statement.setString(9, std.getXeploai());
             statement.execute();
             
         } catch (SQLException ex) {
@@ -129,25 +122,21 @@ public class StudentsModify {
         
         try {
             //select * from
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diem", "root", "");
             
             //query
-            String sql = "update studentmanage set hoten=?, namsinh=?, gioitinh=?, lop=?, email=?, mon1=?, diem1=?, mon2=?, diem2=?, mon3=?, diem3=? where mssv=?";
+            String sql = "update studentmanage set hoten=?, mssv=?, mamon=?, tenmon=?, diembt=?, diemkt=?, diemck=?, diemtong=?, xeploai=? where stt=?";
             statement = connection.prepareCall(sql);
             
             statement.setString(1, std.getHoten());
-            statement.setInt(2, std.getNamsinh());
-            statement.setString(3, std.getGioitinh());
-            statement.setString(4, std.getLop());
-            statement.setString(5, std.getEmail());
-            statement.setString(6, std.getMon1());
-            statement.setDouble(7, std.getDiem1());
-            statement.setString(8, std.getMon1());
-            statement.setDouble(9, std.getDiem2());
-            statement.setString(10, std.getMon1());
-            statement.setDouble(11, std.getDiem3());
-
-            statement.setString(12, std.getMssv());
+            statement.setString(2, std.getMssv());
+            statement.setString(3, std.getMamon());
+            statement.setString(4, std.getTenmon());
+            statement.setDouble(5, std.getDiembt());
+            statement.setDouble(6, std.getDiemkt());
+            statement.setDouble(7, std.getDiemck());
+            statement.setDouble(8, std.getDiemtong());
+            statement.setString(9, std.getXeploai());
             
             statement.execute();
             
@@ -179,7 +168,7 @@ public class StudentsModify {
 
 	    try {
 	        // establish database connection
-	        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_management", "root", "");
+	        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diem", "root", "");
 
 	        // create the SQL query with a placeholder for the STT parameter
 	        String sql = "DELETE FROM studentmanage WHERE stt = ?";
@@ -220,7 +209,7 @@ public class StudentsModify {
          
          try {
              //select * from
-             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_management", "root", "");
+             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/diem", "root", "");
              
              //query
              String sql = "SELECT * FROM studentmanage WHERE mssv LIKE ?";
@@ -231,19 +220,16 @@ public class StudentsModify {
              
              while (resultSet.next()) {                
                  Students std = new Students( 
-                		 resultSet.getInt("stt"),
-                		 resultSet.getString("hoten"), 
-                         resultSet.getString("mssv"),  
-                         resultSet.getInt("namsinh"),
-                         resultSet.getString("gioitinh"), 
-                         resultSet.getString("lop"),
-                         resultSet.getString("email"),
-                         resultSet.getString("mon1"),
-                         resultSet.getDouble("diem1"),
-                         resultSet.getString("mon2"),
-                         resultSet.getDouble("diem2"),
-                         resultSet.getString("mon3"),
-                         resultSet.getDouble("diem3"));
+                 		resultSet.getInt("stt"),
+                        resultSet.getString("hoten"), 
+                        resultSet.getString("mssv"),  
+                        resultSet.getString("mamon"), 
+                        resultSet.getString("tenmon"),
+                        resultSet.getDouble("diembt"),
+                        resultSet.getDouble("diemkt"),
+                        resultSet.getDouble("diemck"),
+                        resultSet.getDouble("diemtong"),
+                        resultSet.getString("xeploai"));
                  studentList.add(std);
              }
          } catch (SQLException ex) {

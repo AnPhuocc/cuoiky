@@ -1,0 +1,15 @@
+stt,hoten,mssv,mamon,tenmon,diembt,diemkt,diemck,diemtong,xeploai
+Diem
+CREATE TABLE studentManage (
+	stt int NOT NULL AUTO_INCREMENT,
+	hoten VARCHAR(100) NOT NULL,
+	mssv VARCHAR(50) NOT NULL,
+	mamon VARCHAR(100),
+	tenmon VARCHAR(100),
+	diembt DOUBLE,
+	diemkt DOUBLE,
+	diemck DOUBLE,
+	diemtong DOUBLE,
+	xeploai VARCHAR(50),
+	PRIMARY KEY (stt)
+);
